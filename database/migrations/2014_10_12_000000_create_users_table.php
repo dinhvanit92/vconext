@@ -20,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->bigInteger('gender');
-            $table->string('expertises');
-            $table->string('locals');
-            $table->string('countries');
-            $table->string('workplaces');
-            $table->string('seeks');
-            $table->string('your_self');
+            $table->bigInteger('gender')->nullable();
+            $table->string('expertises')->nullable();
+            $table->string('locals')->nullable();
+            $table->string('countries')->nullable();
+            $table->string('workplaces')->nullable();
+            $table->string('seeks')->nullable();
+            $table->string('your_self')->nullable();
             $table->timestamps();
         });
     }
