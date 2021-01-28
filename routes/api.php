@@ -22,3 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'Api\AuthController@login');
 Route::post('/register', 'Api\AuthController@register');
 Route::get('/oauth/refreshToken', 'Api\OauthTokenController@refreshToken');
+Route::delete('/logout', 'Api\AuthController@logout')->middleware('auth:api');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::apiResource('/users', 'Admin\UserController');
+    Route::apiResource('/industries', 'Admin\IndustryController');
+    Route::apiResource('/positions', 'Admin\PositionController');
+});

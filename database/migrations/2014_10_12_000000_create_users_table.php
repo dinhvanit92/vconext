@@ -21,12 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->bigInteger('gender')->nullable();
-            $table->string('expertises')->nullable();
-            $table->string('locals')->nullable();
-            $table->string('countries')->nullable();
-            $table->string('workplaces')->nullable();
-            $table->string('seeks')->nullable();
+            $table->string('position')->nullable();
+            $table->string('local')->nullable();
+            $table->string('country')->nullable();
+            $table->string('workplace')->nullable();
+            $table->string('seek')->nullable();
             $table->string('your_self')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
