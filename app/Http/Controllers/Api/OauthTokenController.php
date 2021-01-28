@@ -22,19 +22,20 @@ class OauthTokenController extends Controller
         $response = Http::asForm()->post(env('APP_URL') . '/oauth/token', [
             'grant_type' => 'password',
             'client_id' => '2',
-            'client_secret' => '6ziut8RXDJ834BttSBMKX2GPVc8zbp4Dcjz6dWr0',
+            'client_secret' => '3dPTgxUJ187RLdciccw6yOCRvOSJ4OodQv0VHsi4',
             'username' => $this->request->email,
             'password' => $this->request->password,
             'scope' => '*',
         ]);
         $result = $response->json();
-
-        $this->request->user()->token()->delete();
-        $data = $this->request->user()->token()->create([
-            'access_token' => $result['access_token'],
-            'expires_in' => $result['expires_in'],
-            'refresh_token' => $result['refresh_token'],
-        ]);
+        if (auth()->user()) {
+            $this->request->user()->token()->delete();
+            $data = $this->request->user()->token()->create([
+                'access_token' => $result['access_token'],
+                'expires_in' => $result['expires_in'],
+                'refresh_token' => $result['refresh_token'],
+            ]);
+        }
 
         return response()->json($result, 200);
     }
