@@ -16,7 +16,11 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        $voucher = Voucher::all();
+        return response()->json([
+            'code' => 200,
+            'data' => $voucher,
+        ], 200);
     }
 
     /**
@@ -27,20 +31,17 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->get('https://conext.asia/api/voucher?page=1&zone_id=1');
-        $result = $response->json('result');
-        foreach ($result['listVouchers'] as $value) {
-            Voucher::create([
-                'title' => $value['title'],
-                'content' => $value['content'],
-                'image' => $value['image'],
-                'expried_at' => $value['expired_at'],
-                'priorites' => $value['end_time'],
+        $data = Voucher::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $request->image,
+            'expried_at' => $request->expired_at,
+            'priority' => $request->priority,
 
-            ]);
-        }
+        ]);
         return response()->json([
-            'status' => "Thanh Cong"
+            'code' => 200,
+            'data' => $data
         ]);
     }
 
@@ -52,7 +53,11 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Voucher::find($id);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -64,7 +69,18 @@ class VoucherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Voucher::find($id)->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $request->image,
+            'expried_at' => $request->expired_at,
+            'priority' => $request->priority,
+
+        ]);
+        return response()->json([
+            'code' => 200,
+            'message' => 'Update Success'
+        ]);
     }
 
     /**
@@ -75,6 +91,10 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Voucher::find($id)->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Delete success'
+        ]);
     }
 }

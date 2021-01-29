@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:api', 'scope:view-profile'], function () {
 
 /*API - PAGE HOME*/
 
-Route::get('position', 'PositionController@getPosition');
+Route::get('position', 'PositionController@getPosition')->middleware('admin:api');
 
 Route::get('industry', 'IndustryController@getIndustry');
 
@@ -52,22 +52,34 @@ Route::get('upcoming-event', 'EventController@getUpcomingEvent');
 
 Route::get('past-event', 'EventController@getpastEvent');
 
-/********************************API - PAGE VOUCHERS ********************************** */
+/*PI - PAGE VOUCHERS  */
 
+Route::get('getvoucher', 'VoucherController@getVoucher');
+
+Route::get('getfeaturevoucher', 'VoucherController@getFeatureVoucher');
 
 /********************************API - PAGE WORKPLACES ********************************** */
+
+Route::get('getworkplace', 'WorkplaceController@getWorkplace');
+Route::get('mapsworkplace', 'MapController@getMapWorkplace');
 
 
 /********************************API - PAGE CONTACT ********************************** */
 
+Route::post('contact', 'ContactController@index');
+Route::get('maps', 'MapController@getMap');
+
 
 /********************************API ADMIN ********************************** */
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::apiResource('/users', 'Admin\UserController');
-    Route::apiResource('/industries', 'Admin\IndustryController');
-    Route::apiResource('/positions', 'Admin\PositionController');
-    Route::apiResource('/explore', 'Admin\ExploreController');
-    Route::apiResource('/zone', 'Admin\ZoneController');
-    Route::apiResource('/event', 'Admin\EventController');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
+    Route::apiResource('/users', 'Admin\UserController')->middleware('admin');
+    Route::apiResource('/industries', 'Admin\IndustryController')->middleware('admin');
+    Route::apiResource('/positions', 'Admin\PositionController')->middleware('admin');
+    Route::apiResource('/explore', 'Admin\ExploreController')->middleware('admin');
+    Route::apiResource('/zone', 'Admin\ZoneController')->middleware('admin');
+    Route::apiResource('/event', 'Admin\EventController')->middleware('admin');
+    Route::apiResource('/voucher', 'Admin\VoucherController')->middleware('admin');
+    Route::apiResource('/workplace', 'Admin\WorkplaceController')->middleware('admin');
+    Route::apiResource('/maps', 'Admin\MapsController')->middleware('admin');
 });

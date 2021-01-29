@@ -16,7 +16,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $users = Event::all();
+        return response()->json([
+            'code' => 200,
+            'data' => $users,
+        ], 200);
     }
 
     /**
@@ -27,23 +31,20 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->get('https://conext.asia/api/past-event?zone_id=3');
-        $result = $response->json('result');
-        foreach ($result['listPastEvent'] as $value) {
-            Event::create([
-                'title' => $value['title'],
-                'content' => $value['content'],
-                'image' => $value['image'],
-                'localtion' => $value['location'],
-                'start_time' => $value['start_time'],
-                'end_time' => $value['end_time'],
-                'status' => $value['status'],
-                'zone_id' => $value['zone_id'],
-            ]);
-        }
-        return response()->json([
-            'status' => "Thanh Cong"
+        $event =  Event::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $request->image,
+            'localtion' => $request->location,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'status' => $request->status,
+            'zone_id' => $request->zone_id,
         ]);
+        return response()->json([
+            'code' => 201,
+            'data' => $event
+        ], 201);
     }
 
     /**
@@ -54,7 +55,11 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Event::find($id);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -66,7 +71,21 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $event =  Event::find($id)->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $request->image,
+            'localtion' => $request->location,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'status' => $request->status,
+            'zone_id' => $request->zone_id,
+        ]);
+        return response()->json([
+            'code' => 201,
+            'message' => 'Update Success'
+        ], 201);
     }
 
     /**
@@ -77,6 +96,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Event::find($id)->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Delete success'
+        ]);
     }
 }

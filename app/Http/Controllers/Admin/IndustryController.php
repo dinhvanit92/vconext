@@ -16,7 +16,11 @@ class IndustryController extends Controller
      */
     public function index()
     {
-        //
+        $industries = Industry::all();
+        return response()->json([
+            'code' => 200,
+            'data' => $industries,
+        ], 200);
     }
 
     /**
@@ -27,13 +31,13 @@ class IndustryController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->get('https://conext.asia/api/industries/');
-        $result = $response->json('result');
-        foreach ($result['listIndustries'] as $value) {
-            Industry::create([
-                'content' => $value['content']
-            ]);
-        }
+        $data = Industry::create([
+            'content' => $request->content
+        ]);
+        return response()->json([
+            'code' => 201,
+            'data' => $data
+        ], 201);
     }
 
     /**
@@ -44,7 +48,11 @@ class IndustryController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Industry::find($id);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -56,7 +64,13 @@ class IndustryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Industry::find($id)->update([
+            'content' => $request->content
+        ]);
+        return response()->json([
+            'code' => 201,
+            'message' => 'Update Success'
+        ], 201);
     }
 
     /**
@@ -67,6 +81,10 @@ class IndustryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Industry::find($id)->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Delete success'
+        ]);
     }
 }

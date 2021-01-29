@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Position;
+use App\Models\Workplace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class PositionController extends Controller
+class WorkplaceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $position = Position::all();
+        $workplaces = Workplace::all();
         return response()->json([
             'code' => 200,
-            'data' => $position,
+            'data' => $workplaces,
         ], 200);
     }
 
@@ -31,8 +31,17 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Position::create([
-            'content' => $request->content
+
+        $data = Workplace::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'zone_id' => $request->zone_id,
+            'location' => $request->location,
+            'image_thumb' => $request->image_thumb,
+            'quantity_meetup' => $request->quantity_meetup,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+
         ]);
         return response()->json([
             'code' => 200,
@@ -48,7 +57,7 @@ class PositionController extends Controller
      */
     public function show($id)
     {
-        $data = Position::find($id);
+        $data = Workplace::find($id);
         return response()->json([
             'code' => 200,
             'data' => $data
@@ -64,8 +73,16 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Position::find($id)->update([
-            'content' => $request->content
+        Workplace::find($id)->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'zone_id' => $request->zone_id,
+            'location' => $request->location,
+            'image_thumb' => $request->image_thumb,
+            'quantity_meetup' => $request->quantity_meetup,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+
         ]);
         return response()->json([
             'code' => 200,
@@ -81,7 +98,7 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        Position::find($id)->delete();
+        Workplace::find($id)->delete();
         return response()->json([
             'code' => 200,
             'message' => 'Delete success'

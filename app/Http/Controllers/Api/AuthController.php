@@ -39,14 +39,14 @@ class AuthController extends OauthTokenController
             return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
-    // public function logout(Request $request)
-    // {
-    //     if (Auth::check()) {
-    //         $user = $request->user();
-    //         $user->token()->revoke();
-    //         return response()->json(['success' => 'logout_success'], 200);
-    //     } else {
-    //         return response()->json(['error' => 'api.something_went_wrong'], 500);
-    //     }
-    // }
+    public function logout(Request $request)
+    {
+        if (Auth::check()) {
+            $user = $request->user();
+            $user->token()->delete();
+            return response()->json(['success' => 'logout_success'], 200);
+        } else {
+            return response()->json(['error' => 'api.something_went_wrong'], 500);
+        }
+    }
 }

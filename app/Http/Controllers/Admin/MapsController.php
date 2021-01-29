@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Position;
+use App\Models\Map;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
-class PositionController extends Controller
+class MapsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,10 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $position = Position::all();
+        $maps = Map::all();
         return response()->json([
             'code' => 200,
-            'data' => $position,
+            'data' => $maps,
         ], 200);
     }
 
@@ -31,13 +30,15 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Position::create([
-            'content' => $request->content
+        $data = Map::create([
+            'google_api' => $request->google_api,
+            'longitude'  => $request->longitude,
+            'latitude'  => $request->latitude,
         ]);
         return response()->json([
-            'code' => 200,
+            'code' => 201,
             'data' => $data
-        ]);
+        ], 201);
     }
 
     /**
@@ -48,7 +49,7 @@ class PositionController extends Controller
      */
     public function show($id)
     {
-        $data = Position::find($id);
+        $data = Map::find($id);
         return response()->json([
             'code' => 200,
             'data' => $data
@@ -64,13 +65,15 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Position::find($id)->update([
-            'content' => $request->content
+        $data = Map::find($id)->update([
+            'google_api' => $request->google_api,
+            'longitude'  => $request->longitude,
+            'latitude'  => $request->latitude,
         ]);
         return response()->json([
-            'code' => 200,
+            'code' => 201,
             'message' => 'Update Success'
-        ]);
+        ], 201);
     }
 
     /**
@@ -81,7 +84,7 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        Position::find($id)->delete();
+        Map::find($id)->delete();
         return response()->json([
             'code' => 200,
             'message' => 'Delete success'

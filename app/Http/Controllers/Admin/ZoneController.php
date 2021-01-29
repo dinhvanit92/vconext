@@ -16,7 +16,11 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        //
+        $zones = Zone::all();
+        return response()->json([
+            'code' => 200,
+            'data' => $zones,
+        ], 200);
     }
 
     /**
@@ -27,15 +31,15 @@ class ZoneController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->get('https://conext.asia/api/zone');
-        $result = $response->json('result');
-        foreach ($result['listZones'] as $value) {
-            Zone::create([
-                'name_zone' => $value['name_zone'],
-                'name_country' => $value['name_country'],
-                'name_default' => $value['default']
-            ]);
-        }
+        $data = Zone::create([
+            'name_zone' => $request->name_zone,
+            'name_country' => $request->name_country,
+            'name_default' => $request->default
+        ]);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -46,7 +50,11 @@ class ZoneController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Zone::find($id);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -58,7 +66,15 @@ class ZoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Zone::find($id)->update([
+            'name_zone' => $request->name_zone,
+            'name_country' => $request->name_country,
+            'name_default' => $request->default
+        ]);
+        return response()->json([
+            'code' => 200,
+            'message' => 'Update Success'
+        ]);
     }
 
     /**
@@ -69,6 +85,10 @@ class ZoneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Zone::find($id)->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Delete success'
+        ]);
     }
 }

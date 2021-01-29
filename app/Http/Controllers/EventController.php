@@ -9,7 +9,6 @@ class EventController extends Controller
 {
     public function getUpcomingEvent()
     {
-        // dd(now());
         $event = Event::where('status', 'Upcoming Event')->get()->all();
         return response()->json([
             'code' => 200,

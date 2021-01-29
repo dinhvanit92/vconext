@@ -16,7 +16,11 @@ class ExploreController extends Controller
      */
     public function index()
     {
-        //
+        $datas = Explore::all();
+        return response()->json([
+            'code' => 200,
+            'data' => $datas,
+        ], 200);
     }
 
     /**
@@ -27,14 +31,15 @@ class ExploreController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->get('https://conext.asia/api/global-images');
-        $result = $response->json('result');
-        foreach ($result['images'] as $value) {
-            Explore::create([
-                'name' => $value['content'],
-                'image' => $value['image_url']
-            ]);
-        }
+
+        $data = Explore::create([
+            'name' => $request->content,
+            'image' => $request->image_url
+        ]);
+        return response()->json([
+            'code' => 201,
+            'data' => $data
+        ], 201);
     }
 
     /**
@@ -45,7 +50,11 @@ class ExploreController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Explore::find($id);
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -57,7 +66,14 @@ class ExploreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Explore::find($id)->create([
+            'name' => $request->content,
+            'image' => $request->image_url
+        ]);
+        return response()->json([
+            'code' => 201,
+            'message' => 'Update Success'
+        ], 201);
     }
 
     /**
@@ -68,6 +84,10 @@ class ExploreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Explore::find($id)->delete();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Delete success'
+        ]);
     }
 }
