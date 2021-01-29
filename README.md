@@ -1,62 +1,171 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## HOW TO USE MY API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+/_API - PAGE LOGIN LOGOUT _/
 
-## About Laravel
+1. Login page
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```
+http://vconext.com/api/v1/login
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. Register page
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
+http://vconext.com/api/v1/register
+```
 
-## Learning Laravel
+3. Refresh Token
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+http://vconext.com/api/v1/oauth/refreshToken
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. Logout
 
-## Laravel Sponsors
+```
+http://vconext.com/api/v1/logout
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+/_API - PAGE PROFILE _/
 
-### Premium Partners
+```
+http://vconext.com/api/v1/profile
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+/_API - PAGE HOME_/
 
-## Contributing
+1. Api Business type
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+http://vconext.com/api/v1/position
+```
 
-## Code of Conduct
+2. Api Industry
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+http://vconext.com/api/v1/industry
+```
 
-## Security Vulnerabilities
+3. Api get User
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+http://vconext.com/api/v1/getuser
+```
 
-## License
+4. Api get explore
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+http://vconext.com/api/v1/getexplore
+```
+
+/_API - PAGE EVENT _/
+
+1. Api Upcoming Event
+
+```
+http://vconext.com/api/v1/past-event
+```
+
+2. Api Past Event
+
+```
+http://vconext.com/api/v1/upcoming-event
+```
+
+/_PI - PAGE VOUCHERS _/
+
+1. Api Get voucher
+
+```
+http://vconext.com/api/v1/getvoucher
+```
+
+2. Api Get FeatureVoucher
+
+```
+http://vconext.com/api/v1/getfeaturevoucher
+```
+
+/_API - PAGE WORKPLACES _/
+
+1. Api get Workplace
+
+```
+http://vconext.com/api/v1/getworkplace
+```
+
+2. Api get mapsworkplace
+
+```
+http://vconext.com/api/v1/mapsworkplace
+```
+
+/_API - PAGE CONTACT _/
+
+1. Api get Contact
+
+```
+http://vconext.com/api/v1/contact
+```
+
+2. Api get Maps
+
+```
+http://vconext.com/api/v1/maps
+```
+
+/\*API ADMIN \*\*/
+
+1. ADMIN USER
+
+```
+http://vconext.com/api/v1/admin/users
+```
+
+2. API INDUSTRY
+
+```
+http://vconext.com/api/v1/admin/industries
+```
+
+3. API POSITION
+
+```
+http://vconext.com/api/v1/admin/positions
+```
+
+4. API EXPLORE
+
+```
+http://vconext.com/api/v1/admin/explore
+```
+
+5. API ZONE
+
+```
+http://vconext.com/api/v1/admin/zone
+```
+
+6. API EVENT
+
+```
+http://vconext.com/api/v1/admin/event
+```
+
+7. API Voucher
+
+```
+http://vconext.com/api/v1/admin/voucher
+```
+
+8. API Workplace
+
+```
+http://vconext.com/api/v1/admin/workplace
+```
+
+9. API Maps
+
+```
+http://vconext.com/api/v1/admin/maps
+```
