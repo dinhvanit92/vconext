@@ -1,0 +1,45 @@
+version: "3.9"
+
+networks:
+  www-network:
+    external: true
+services:
+  webserver:
+    build: ./
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+    # labels:
+    #   traefik.enable: true
+    #   traefik.http.routers.web.rule: Host(`api.thongtinketoan.com`)
+    #   traefik.http.routers.web.entrypoints: websecure
+    #   traefik.http.routers.web.tls.certresolver: myresolver
+    networks:
+      www-network:
+  db:
+    image: mysql:8
+    ports:
+      - "33306:3306"
+    environment:
+      MYSQL_DATABASE: vconext
+      MYSQL_ROOT_PASSWORD: vanit@1992
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
+    networks:
+      www-network:
+  phpmyroot:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8081:80
+    environment:
+      MYSQL_ROOT_PASSWORD: vanit@1992
+    networks:
+      www-network:
+volumes:
+  persistent:
